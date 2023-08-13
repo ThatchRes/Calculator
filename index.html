@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Calculator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="screen">
+            <div id="equation"></div>
+            <div id="inputText" class="input">0</div>
+        </div>
+        <div class="topBtns">
+            <button id="clear">Clear</button>
+            <button id="delete">Delete</button>
+        </div>
+        <div class="btmBtns">
+            <button class="num" number>7</button>
+            <button class="num" number>8</button>
+            <button class="num" number>9</button>
+            <button class="operation" operator>÷</button>
+            <button class="num" number>4</button>
+            <button class="num" number>5</button>
+            <button class="num" number>6</button>
+            <button class="operation" operator>x</button>
+            <button class="num" number>1</button>
+            <button class="num" number>2</button>
+            <button class="num" number>3</button>
+            <button class="operation" operator>-</button>
+            <button  class="operation" number>.</button>
+            <button class="num" number>0</button>
+            <button id = 'equals' class="operation">=</button>
+            <button class="operation" operator>+</button>
+        </div>
+
+    </body>
+    <script>
+        const numberBtn = 
+        document.querySelectorAll("[number]")   
+        const operatorBtn =
+        document.querySelectorAll("[operator]")
+        const clearBtn = 
+        document.getElementById("clear")
+        const deleteBtn = 
+        document.getElementById("delete")
+        const equation =
+        document.getElementById("equation")
+        const inputText =
+        document.getElementById("inputText")
+        const equalBtn = 
+        document.getElementById("equals")
+
+
+
+        function clearInput(){
+            inputText.textContent = ""
+            return inputText;
+        }
+
+        function clearAll() {
+            console.log("hi")
+            clearInput()
+            equation.textContent = "0"
+        }
+        function removeLast() {
+            inputText.textContent = inputText.textContent.slice(0, -1)
+
+        }
+        clearBtn.addEventListener('click', () => clearAll())
+        deleteBtn.addEventListener('click', () => removeLast())
+        numberBtn.forEach((button) =>
+            button.addEventListener('click', () => addInput(button.textContent))
+        )
+
+        
+        function addInput(number) {
+            console.log(number)
+            if (inputText.textContent === "0"){
+                clearInput()
+            }   
+                inputText.textContent += number
+        }
+        operatorBtn.forEach((button) =>
+            button.addEventListener('click', () => toEquation(button.textContent))
+        )
+        function toEquation(operator) {
+            inputText.textContent += " " + operator
+            equation.textContent = inputText.textContent;
+            inputText.textContent = "0";
+            console.log(equation)
+        }
+        equalBtn.addEventListener('click', () => doMath())
+
+        function doMath(){
+            const decimal = "."
+            if (equation.textContent.includes(decimal)) {
+                a = parseFloat(inputText.textContent)
+                b = parseFloat(equation.textContent.replace(/[x÷+-]/g, ""))
+            } else {
+                a = Number(inputText.textContent)
+                b = Number(equation.textContent.replace(/[x÷+-]/g, ""))
+            }
+            const divide = "÷"
+            const add = "+"
+            const multiple = "x"
+            const subtract = "-"
+            if (equation.textContent.includes(divide)) {
+                let result = b / a 
+                equation.textContent = `${b} ÷ ${a}`
+                inputText.textContent = result 
+            } else if (equation.textContent.includes(add)) {
+                let result = b + a 
+                equation.textContent = `${b} + ${a}`
+                inputText.textContent = result 
+            } else if (equation.textContent.includes(multiple)) {
+                let result = b * a 
+                equation.textContent = `${b} x ${a}`
+                inputText.textContent = result 
+            } else if (equation.textContent.includes(multiple)) {
+                let result = b - a 
+                equation.textContent = `${b} - ${a}`
+                inputText.textContent = result 
+            } 
+
+        }
+
+    </script>
+</html>

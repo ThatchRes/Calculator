@@ -1,0 +1,75 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 150px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 400px;
+}
+.screen {
+    border: 2px solid black;
+    border-radius: 7px;
+    width: 355px;
+    height: 100px;
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    
+}
+#inputText {
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: bold;
+}
+#equation {
+    font-size: 40px;
+    font-weight: 800px;
+}
+
+
+
+
+.btmBtns {
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    
+}
+.num, .operation {
+    width: 85px;
+    height: 85px;
+    border: 2px solid black;
+    border-radius: 7px;
+    font-size: 40px;
+}
+.num:hover, .operation:hover {
+    background-color: rgb(159, 159, 159);
+}
+
+#clear, #delete {
+    width: 175px;
+    height: 85px;
+    border: 2px solid black;
+    border-radius: 7px;
+    font-size: 40px;
+}
+#clear {
+    background-color: rgb(253, 141, 160);
+}
+#clear:hover{
+    background-color: rgb(250, 124, 145);
+}
+#delete{
+    background-color: rgb(88, 119, 255);
+}
+#delete:hover{
+    background-color: rgb(66, 100, 250);
+}
