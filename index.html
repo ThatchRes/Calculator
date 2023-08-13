@@ -27,7 +27,7 @@
             <button class="num" number>2</button>
             <button class="num" number>3</button>
             <button class="operation" operator>-</button>
-            <button  class="operation" number>.</button>
+            <button  id = "decimal" class="operation" >.</button>
             <button class="num" number>0</button>
             <button id = 'equals' class="operation">=</button>
             <button class="operation" operator>+</button>
@@ -49,6 +49,8 @@
         document.getElementById("inputText")
         const equalBtn = 
         document.getElementById("equals")
+        const decimalBtn =
+        document.getElementById("decimal")
 
 
 
@@ -61,9 +63,15 @@
             console.log("hi")
             clearInput()
             equation.textContent = "0"
+                decimalBtn.disabled = false;
+            
         }
         function removeLast() {
+            const decimal = "."
             inputText.textContent = inputText.textContent.slice(0, -1)
+            if (!inputText.textContent.includes(decimal)) {
+                decimalBtn.disabled = false;
+            }
 
         }
         clearBtn.addEventListener('click', () => clearAll())
@@ -71,22 +79,35 @@
         numberBtn.forEach((button) =>
             button.addEventListener('click', () => addInput(button.textContent))
         )
+        decimalBtn.addEventListener('click', () => addDecimal())
+        function addDecimal() {
+            if (inputText.textContent === "0"){
+                clearInput()
+            } 
+                inputText.textContent += "."
+                decimalBtn.disabled = true;
 
-        
+        }
         function addInput(number) {
             console.log(number)
             if (inputText.textContent === "0"){
                 clearInput()
-            }   
+            } 
                 inputText.textContent += number
         }
         operatorBtn.forEach((button) =>
             button.addEventListener('click', () => toEquation(button.textContent))
         )
         function toEquation(operator) {
+            if (equation.textContent != null) {
+                doMath()
+            }
             inputText.textContent += " " + operator
             equation.textContent = inputText.textContent;
-            inputText.textContent = "0";
+                inputText.textContent = "0";
+            
+            
+            
             console.log(equation)
         }
         equalBtn.addEventListener('click', () => doMath())
@@ -107,19 +128,23 @@
             if (equation.textContent.includes(divide)) {
                 let result = b / a 
                 equation.textContent = `${b} ÷ ${a}`
-                inputText.textContent = result 
+                inputText.textContent = result;
+                return result;
             } else if (equation.textContent.includes(add)) {
                 let result = b + a 
                 equation.textContent = `${b} + ${a}`
                 inputText.textContent = result 
+                return result;
             } else if (equation.textContent.includes(multiple)) {
                 let result = b * a 
                 equation.textContent = `${b} x ${a}`
                 inputText.textContent = result 
+                return result;
             } else if (equation.textContent.includes(multiple)) {
                 let result = b - a 
                 equation.textContent = `${b} - ${a}`
                 inputText.textContent = result 
+                return result;
             } 
 
         }
